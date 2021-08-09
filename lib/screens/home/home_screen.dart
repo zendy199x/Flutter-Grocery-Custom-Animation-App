@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:grocery_custom_animation/constants.dart';
 import 'package:grocery_custom_animation/controllers/home_controller.dart';
 import 'package:grocery_custom_animation/models/product.dart';
 import 'package:grocery_custom_animation/screens/deatils/details_screen.dart';
+import 'package:grocery_custom_animation/screens/home/components/card_short_view.dart';
 import 'package:grocery_custom_animation/screens/home/components/header.dart';
 import 'package:grocery_custom_animation/screens/home/components/product_card.dart';
 
@@ -29,10 +29,10 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           color: const Color(0xFFEAEAEA),
           child: AnimatedBuilder(
-              animation: controller,
-              builder: (context, _) {
-                return LayoutBuilder(
-                    builder: (context, BoxConstraints constraints) {
+            animation: controller,
+            builder: (context, _) {
+              return LayoutBuilder(
+                builder: (context, BoxConstraints constraints) {
                   return Stack(
                     children: [
                       AnimatedPositioned(
@@ -86,6 +86,11 @@ class HomeScreen extends StatelessWidget {
                                       opacity: animation,
                                       child: DetailsScreen(
                                         product: demoProducts[index],
+                                        onProductAdd: () {
+                                          controller.addProductToCart(
+                                            demoProducts[index],
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
@@ -107,7 +112,13 @@ class HomeScreen extends StatelessWidget {
                         child: GestureDetector(
                           onVerticalDragUpdate: _onVericalGesture,
                           child: Container(
+                            padding: const EdgeInsets.all(defaultPadding),
                             color: const Color(0xFFEAEAEA),
+                            alignment: Alignment.topLeft,
+                            child: AnimatedSwitcher(
+                              duration: panelTransition,
+                              child: CardShortView(controller: controller),
+                            ),
                           ),
                         ),
                       ),
@@ -124,8 +135,10 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   );
-                });
-              }),
+                },
+              );
+            },
+          ),
         ),
       ),
     );
