@@ -4,6 +4,7 @@ import 'package:grocery_custom_animation/controllers/home_controller.dart';
 import 'package:grocery_custom_animation/models/product.dart';
 import 'package:grocery_custom_animation/screens/deatils/details_screen.dart';
 import 'package:grocery_custom_animation/screens/home/components/card_short_view.dart';
+import 'package:grocery_custom_animation/screens/home/components/cart_details_view.dart';
 import 'package:grocery_custom_animation/screens/home/components/header.dart';
 import 'package:grocery_custom_animation/screens/home/components/product_card.dart';
 
@@ -117,7 +118,9 @@ class HomeScreen extends StatelessWidget {
                             alignment: Alignment.topLeft,
                             child: AnimatedSwitcher(
                               duration: panelTransition,
-                              child: CardShortView(controller: controller),
+                              child: controller.homeState == HomeState.normal
+                                  ? CardShortView(controller: controller)
+                                  : CartDetailView(controller: controller),
                             ),
                           ),
                         ),
