@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:grocery_custom_animation/constants.dart';
 import 'package:grocery_custom_animation/controllers/home_controller.dart';
 import 'package:grocery_custom_animation/models/product.dart';
+import 'package:grocery_custom_animation/screens/deatils/details_screen.dart';
 import 'package:grocery_custom_animation/screens/home/components/header.dart';
 import 'package:grocery_custom_animation/screens/home/components/product_card.dart';
 
@@ -69,7 +70,27 @@ class HomeScreen extends StatelessWidget {
                             ),
                             itemBuilder: (context, index) => ProductCard(
                               product: demoProducts[index],
-                              press: () {},
+                              press: () {
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    transitionDuration: const Duration(
+                                      milliseconds: 400,
+                                    ),
+                                    reverseTransitionDuration: const Duration(
+                                      milliseconds: 400,
+                                    ),
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
+                                        FadeTransition(
+                                      opacity: animation,
+                                      child: DetailsScreen(
+                                        product: demoProducts[index],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ),
