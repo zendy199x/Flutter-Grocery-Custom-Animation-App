@@ -12,6 +12,9 @@
 ### Screenshots
 
 <p align="center">
+  <img src="/screenshots/screen_record_1.gif" width="350">
+  <br/>
+  <br/>
   <img src="/screenshots/screenshot_1.png" width="350">
   <br/>
   <br/>
